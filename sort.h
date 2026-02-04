@@ -34,7 +34,8 @@ void print_list(const listint_t *list);
 void print_array(const int *array, size_t size);
 
 /**
- * bubble_sort - Sorts an array of integers in ascending order using Bubble sort
+ * bubble_sort - Sorts an array of integers in ascending order
+ * using the Bubble sort algorithm
  * @array: Pointer to the array
  * @size: Number of elements
  */
@@ -47,7 +48,8 @@ void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
 
 /**
- * selection_sort - Sorts an array of integers in ascending order using Selection sort
+ * selection_sort - Sorts an array of integers in ascending order
+ * using the Selection sort algorithm
  * @array: Pointer to the array
  * @size: Number of elements
  */
