@@ -1,9 +1,9 @@
 #include "sort.h"
 
 /**
- * print_array - prints an array of integers
- * @array: array to print
- * @size: number of elements
+ * print_array - Prints an array of integers
+ * @array: Pointer to the array
+ * @size: Number of elements in array
  */
 void print_array(const int *array, size_t size)
 {
