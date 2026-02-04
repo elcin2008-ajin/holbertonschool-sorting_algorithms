@@ -4,6 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Doubly linked list node struct */
+typedef struct listint_s
+{
+    int n;
+    struct listint_s *prev;
+    struct listint_s *next;
+} listint_t;
+
 /* Function prototypes */
 
 /* print_array prototype */
@@ -14,13 +22,5 @@ void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
-
-/* Doubly linked list node struct */
-typedef struct listint_s
-{
-    int n;
-    struct listint_s *prev;
-    struct listint_s *next;
-} listint_t;
 
 #endif /* SORT_H */
