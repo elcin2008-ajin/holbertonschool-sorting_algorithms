@@ -1,10 +1,3 @@
-#include "shell.h"
-
-/**
- * main - simple shell
- * Return: 0 on success
- */
-
 int main(void)
 {
 	char *line = NULL;
@@ -19,10 +12,7 @@ int main(void)
 
 		read = getline(&line, &len, stdin);
 		if (read == -1)
-		{
-			free(line);
-			exit(0);
-		}
+			break;
 
 		args = parse_line(line);
 		if (args == NULL)
@@ -31,8 +21,7 @@ int main(void)
 		if (args[0] != NULL && strcmp(args[0], "exit") == 0)
 		{
 			free_args(args);
-			free(line);
-			exit(0);
+			break;
 		}
 
 		execute_command(args);
