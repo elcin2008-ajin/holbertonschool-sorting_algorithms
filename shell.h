@@ -13,5 +13,6 @@
 char **parse_line(char *line);
 void execute_command(char **args);
 void free_args(char **args);
+char *_getline(void);
 
 #endif

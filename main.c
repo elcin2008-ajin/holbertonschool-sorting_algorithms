@@ -1,33 +1,37 @@
+#include "shell.h"
+
 int main(void)
 {
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t read;
-	char **args;
+    char *line = NULL;
+    char **args;
 
-	while (1)
-	{
-		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "$ ", 2);
+    while (1)
+    {
+        if (isatty(STDIN_FILENO))
+            write(STDOUT_FILENO, "$ ", 2);
 
-		read = getline(&line, &len, stdin);
-		if (read == -1)
-			break;
+        line = _getline();
+        if (line == NULL)
+            break;
 
-		args = parse_line(line);
-		if (args == NULL)
-			continue;
+        args = parse_line(line);
+        if (!args)
+        {
+            free(line);
+            continue;
+        }
 
-		if (args[0] != NULL && strcmp(args[0], "exit") == 0)
-		{
-			free_args(args);
-			break;
-		}
+        if (args[0] && strcmp(args[0], "exit") == 0)
+        {
+            free_args(args);
+            free(line);
+            break;
+        }
 
-		execute_command(args);
-		free_args(args);
-	}
+        execute_command(args);
+        free_args(args);
+        free(line);
+    }
 
-	free(line);
-	return (0);
+    return (0);
 }
