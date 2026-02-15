@@ -1,37 +1,31 @@
 #include "shell.h"
+#include <string.h>
+#include <stdlib.h>
 
-int main(void)
+char **parse_line(char *line)
 {
-    char *line;
-    char **args;
+    int bufsize = 64, pos = 0;
+    char **tokens = malloc(sizeof(char *) * bufsize);
+    char *token;
 
-    while (1)
+    if (!tokens)
+        return NULL;
+
+    token = strtok(line, " \t\r\n");
+    while (token)
     {
-        if (isatty(STDIN_FILENO))
-            write(STDOUT_FILENO, "$ ", 2);
+        tokens[pos++] = token;
 
-        line = _getline();
-        if (!line)
-            break;
-
-        args = parse_line(line);
-        if (!args)
+        if (pos >= bufsize)
         {
-            free(line);
-            continue;
+            bufsize += 64;
+            tokens = realloc(tokens, sizeof(char *) * bufsize);
+            if (!tokens)
+                return NULL;
         }
 
-        if (args[0] && strcmp(args[0], "exit") == 0)
-        {
-            free_args(args);
-            free(line);
-            break;
-        }
-
-        execute_command(args);
-        free_args(args);
-        free(line);
+        token = strtok(NULL, " \t\r\n");
     }
-
-    return (0);
+    tokens[pos] = NULL;
+    return tokens;
 }
