@@ -24,6 +24,7 @@ char **parse_line(char *line)
 
         token = strtok(NULL, DELIM);
     }
+
     tokens[pos] = NULL;
     return (tokens);
 }

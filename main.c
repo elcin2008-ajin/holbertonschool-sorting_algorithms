@@ -11,7 +11,7 @@ int main(void)
             write(STDOUT_FILENO, "$ ", 2);
 
         line = _getline();
-        if (line == NULL)
+        if (!line)  // EOF və ya read error
             break;
 
         args = parse_line(line);
@@ -21,6 +21,7 @@ int main(void)
             continue;
         }
 
+        // exit built-in
         if (args[0] && strcmp(args[0], "exit") == 0)
         {
             free_args(args);
