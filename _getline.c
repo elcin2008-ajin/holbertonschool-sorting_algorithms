@@ -13,7 +13,8 @@ char *_getline(void)
         return (NULL);
 
     buffer[r] = '\0';
-    line = malloc(sizeof(char) * (r + 1));
+
+    line = malloc(r + 1);
     if (!line)
         return (NULL);
 
@@ -21,5 +22,5 @@ char *_getline(void)
         line[i] = buffer[i];
     line[i] = '\0';
 
-    return (line);
+    return line;
 }
